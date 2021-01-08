@@ -1,2 +1,2 @@
 # Calcul-Numeric
-Implementarea diferitelor metode de cn
+Implementarea diferitelor metode de calcul numeric
