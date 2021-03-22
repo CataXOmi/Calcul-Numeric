@@ -1,0 +1,398 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      --><title>EXC5</title><meta name="generator" content="MATLAB 9.5"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-05-28"><meta name="DC.source" content="EXC5.m"><style type="text/css">
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
+
+html { min-height:100%; margin-bottom:1px; }
+html body { height:100%; margin:0px; font-family:Arial, Helvetica, sans-serif; font-size:10px; color:#000; line-height:140%; background:#fff none; overflow-y:scroll; }
+html body td { vertical-align:top; text-align:left; }
+
+h1 { padding:0px; margin:0px 0px 25px; font-family:Arial, Helvetica, sans-serif; font-size:1.5em; color:#d55000; line-height:100%; font-weight:normal; }
+h2 { padding:0px; margin:0px 0px 8px; font-family:Arial, Helvetica, sans-serif; font-size:1.2em; color:#000; font-weight:bold; line-height:140%; border-bottom:1px solid #d6d4d4; display:block; }
+h3 { padding:0px; margin:0px 0px 5px; font-family:Arial, Helvetica, sans-serif; font-size:1.1em; color:#000; font-weight:bold; line-height:140%; }
+
+a { color:#005fce; text-decoration:none; }
+a:hover { color:#005fce; text-decoration:underline; }
+a:visited { color:#004aa0; text-decoration:none; }
+
+p { padding:0px; margin:0px 0px 20px; }
+img { padding:0px; margin:0px 0px 20px; border:none; }
+p img, pre img, tt img, li img, h1 img, h2 img { margin-bottom:0px; } 
+
+ul { padding:0px; margin:0px 0px 20px 23px; list-style:square; }
+ul li { padding:0px; margin:0px 0px 7px 0px; }
+ul li ul { padding:5px 0px 0px; margin:0px 0px 7px 23px; }
+ul li ol li { list-style:decimal; }
+ol { padding:0px; margin:0px 0px 20px 0px; list-style:decimal; }
+ol li { padding:0px; margin:0px 0px 7px 23px; list-style-type:decimal; }
+ol li ol { padding:5px 0px 0px; margin:0px 0px 7px 0px; }
+ol li ol li { list-style-type:lower-alpha; }
+ol li ul { padding-top:7px; }
+ol li ul li { list-style:square; }
+
+.content { font-size:1.2em; line-height:140%; padding: 20px; }
+
+pre, code { font-size:12px; }
+tt { font-size: 1.2em; }
+pre { margin:0px 0px 20px; }
+pre.codeinput { padding:10px; border:1px solid #d3d3d3; background:#f7f7f7; }
+pre.codeoutput { padding:10px 11px; margin:0px 0px 20px; color:#4c4c4c; }
+pre.error { color:red; }
+
+@media print { pre.codeinput, pre.codeoutput { word-wrap:break-word; width:100%; } }
+
+span.keyword { color:#0000FF }
+span.comment { color:#228B22 }
+span.string { color:#A020F0 }
+span.untermstring { color:#B20000 }
+span.syscmd { color:#B28C00 }
+
+.footer { width:auto; padding:10px 0px; margin:25px 0px 0px; border-top:1px dotted #878787; font-size:0.8em; line-height:140%; font-style:italic; color:#878787; text-align:left; float:none; }
+.footer p { margin:0px; }
+.footer a { color:#878787; }
+.footer a:hover { color:#878787; text-decoration:underline; }
+.footer a:visited { color:#878787; }
+
+table th { padding:7px 5px; text-align:left; vertical-align:middle; border: 1px solid #d6d4d4; font-weight:bold; }
+table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px solid #d6d4d4; }
+
+
+
+
+
+  </style></head><body><div class="content"><h2>Contents</h2><div><ul><li><a href="#1">Algoritmi utilizati</a></li><li><a href="#2">Exercitiul 5</a></li></ul></div><h2 id="1">Algoritmi utilizati</h2><pre class="codeinput">disp(<span class="string">'Metoda Hermite'</span>);
+type (<span class="string">'MetHer.m'</span>);
+disp(<span class="string">'Metoda Neville'</span>);
+type(<span class="string">'MetNeville.m'</span>);
+disp(<span class="string">'Metoda Newton cu diferente divizate'</span>);
+type (<span class="string">'MetNewDD.m'</span>);
+</pre><pre class="codeoutput">Metoda Hermite
+
+function [y,z] = MetHer(X,Y,Z,x)
+    n=length(X)-1;
+    Her=0;
+    Herp=0;
+    for k=1:n+1
+          a=1;
+          L=1;
+          Lpk=0;
+          Lp=0;
+          for j=1:n+1
+              prod=1;
+              if j~=k
+                  a=a*(X(k)-X(j));
+                  L=L*((x-X(j))/(X(k)-X(j)));
+                  Lpk=Lpk+(1/(X(k)-X(j)));  
+                  for i=1:n+1 
+                      if i~=j &amp;&amp; i~=k
+                          prod=prod*(x-X(i));
+                      end
+                  end
+                  Lp=Lp+prod;
+              end
+          end
+          Lp=Lp/a;
+          H=(L*L)*(1-2*Lpk*(x-X(k)));
+          K=(L*L)*(x-X(k));
+          Her=Her+H*Y(k)+K*Z(k);
+          Hp=2*L*Lp*(1-2*Lpk*(x-X(k)))+(L*L)*(-2*Lpk);
+          Kp=2*L*Lp*(x-X(k))+L*L;
+          Herp=Herp+Hp*Y(k)+Kp*Z(k);
+    end
+    y=Her;
+    z=Herp;
+end
+
+
+Metoda Neville
+
+function [y] = MetNeville(X,Y,x,f)
+    n=length(X)-1;    
+    for i=1:n+1
+        Q(i,1)=f(X(i));
+    end
+    for i=2:n+1
+        for j=2:i
+            Q(i,j)=((x-X(i-j+1))*Q(i,j-1)-(x-X(i))*Q(i-1,j-1))/(X(i)-X(i-j+1));
+        end
+    end
+    Pn=Q(n+1,n+1);
+    y=Pn;        
+end
+
+Metoda Newton cu diferente divizate
+
+function [y] = MetNewDD(X,Y,x,f)
+    n=length(X)-1;   
+    for i=1:n+1
+        Q(i,1)=f(X(i));
+    end
+    for i=2:n+1
+        for j=2:i
+            Q(i,j)=(Q(i,j-1)-Q(i-1,j-1))/(X(i)-X(i-j+1));
+        end
+    end
+    Pn=Q(1,1);
+    for k=2:n+1
+        p=1;
+        for i=1:k-1
+            p=p*(x-X(i));
+        end
+        Pn=Pn+Q(k,k)*p;
+    end
+    y=Pn;        
+end
+
+</pre><h2 id="2">Exercitiul 5</h2><pre class="codeinput">f=@(x)sin(x)
+xmin=-pi/2;
+xmax=pi/2;
+X=linspace(xmin,xmax,3);
+Y=f(X);
+fp=@(x)cos(x)
+Z=fp(X);
+figure(1)
+plot(X,Y,<span class="string">'o'</span>,<span class="string">'MarkerFaceColor'</span>,<span class="string">'b'</span>,<span class="string">'Markersize'</span>,10);
+x=linspace(xmin,xmax,100);
+<span class="keyword">for</span> i=1:length(x)
+    [y(i),z(i)]=MetHer(X,Y,Z,x(i));
+<span class="keyword">end</span>
+<span class="keyword">for</span> i=1:length(x)
+    [y(i)]=MetNeville(X,Y,x(i),f);
+<span class="keyword">end</span>
+<span class="keyword">for</span> i=1:length(x)
+    [y(i)]=MetNewDD(X,Y,x(i),f);
+<span class="keyword">end</span>
+Y=f(x)
+Z=fp(x)
+hold <span class="string">on</span>
+plot(x,Y,<span class="string">'o'</span>,<span class="string">'MarkerFaceColor'</span>,<span class="string">'b'</span>,<span class="string">'Markersize'</span>,10);
+grid <span class="string">on</span>
+plot(x,y,<span class="string">'Linewidth'</span>,3);
+grid <span class="string">on</span>
+figure(2)
+hold <span class="string">on</span>;
+plot(x,Z,<span class="string">'o'</span>,<span class="string">'MarkerFaceColor'</span>,<span class="string">'b'</span>,<span class="string">'Markersize'</span>,10);
+grid <span class="string">on</span>
+plot(x,z,<span class="string">'Linewidth'</span>,3);
+grid <span class="string">on</span>
+
+disp(<span class="string">'Reprezentare eroare E=|f-Pn|'</span>);
+figure(3)
+syms <span class="string">xp</span>;
+Pn=0;
+<span class="keyword">for</span> i=1:length(x)
+    Pn=Pn+(y(i)*(xp^(i-1)));
+<span class="keyword">end</span>
+Pn=matlabFunction(Pn,<span class="string">'vars'</span>,{xp});
+Pn(xp)
+E1=abs(f(xp)-Pn(xp));
+fplot(E1,[-pi/2,pi/2]);
+</pre><pre class="codeoutput">
+f =
+
+  function_handle with value:
+
+    @(x)sin(x)
+
+
+fp =
+
+  function_handle with value:
+
+    @(x)cos(x)
+
+
+Y =
+
+  Columns 1 through 7
+
+   -1.0000   -0.9995   -0.9980   -0.9955   -0.9920   -0.9874   -0.9819
+
+  Columns 8 through 14
+
+   -0.9754   -0.9679   -0.9595   -0.9501   -0.9397   -0.9284   -0.9161
+
+  Columns 15 through 21
+
+   -0.9029   -0.8888   -0.8738   -0.8580   -0.8413   -0.8237   -0.8053
+
+  Columns 22 through 28
+
+   -0.7861   -0.7660   -0.7453   -0.7237   -0.7015   -0.6785   -0.6549
+
+  Columns 29 through 35
+
+   -0.6306   -0.6056   -0.5801   -0.5539   -0.5272   -0.5000   -0.4723
+
+  Columns 36 through 42
+
+   -0.4441   -0.4154   -0.3863   -0.3569   -0.3271   -0.2969   -0.2665
+
+  Columns 43 through 49
+
+   -0.2358   -0.2048   -0.1736   -0.1423   -0.1108   -0.0792   -0.0476
+
+  Columns 50 through 56
+
+   -0.0159    0.0159    0.0476    0.0792    0.1108    0.1423    0.1736
+
+  Columns 57 through 63
+
+    0.2048    0.2358    0.2665    0.2969    0.3271    0.3569    0.3863
+
+  Columns 64 through 70
+
+    0.4154    0.4441    0.4723    0.5000    0.5272    0.5539    0.5801
+
+  Columns 71 through 77
+
+    0.6056    0.6306    0.6549    0.6785    0.7015    0.7237    0.7453
+
+  Columns 78 through 84
+
+    0.7660    0.7861    0.8053    0.8237    0.8413    0.8580    0.8738
+
+  Columns 85 through 91
+
+    0.8888    0.9029    0.9161    0.9284    0.9397    0.9501    0.9595
+
+  Columns 92 through 98
+
+    0.9679    0.9754    0.9819    0.9874    0.9920    0.9955    0.9980
+
+  Columns 99 through 100
+
+    0.9995    1.0000
+
+
+Z =
+
+  Columns 1 through 7
+
+    0.0000    0.0317    0.0634    0.0951    0.1266    0.1580    0.1893
+
+  Columns 8 through 14
+
+    0.2203    0.2511    0.2817    0.3120    0.3420    0.3717    0.4009
+
+  Columns 15 through 21
+
+    0.4298    0.4582    0.4862    0.5137    0.5406    0.5671    0.5929
+
+  Columns 22 through 28
+
+    0.6182    0.6428    0.6668    0.6901    0.7127    0.7346    0.7557
+
+  Columns 29 through 35
+
+    0.7761    0.7958    0.8146    0.8326    0.8497    0.8660    0.8815
+
+  Columns 36 through 42
+
+    0.8960    0.9096    0.9224    0.9341    0.9450    0.9549    0.9638
+
+  Columns 43 through 49
+
+    0.9718    0.9788    0.9848    0.9898    0.9938    0.9969    0.9989
+
+  Columns 50 through 56
+
+    0.9999    0.9999    0.9989    0.9969    0.9938    0.9898    0.9848
+
+  Columns 57 through 63
+
+    0.9788    0.9718    0.9638    0.9549    0.9450    0.9341    0.9224
+
+  Columns 64 through 70
+
+    0.9096    0.8960    0.8815    0.8660    0.8497    0.8326    0.8146
+
+  Columns 71 through 77
+
+    0.7958    0.7761    0.7557    0.7346    0.7127    0.6901    0.6668
+
+  Columns 78 through 84
+
+    0.6428    0.6182    0.5929    0.5671    0.5406    0.5137    0.4862
+
+  Columns 85 through 91
+
+    0.4582    0.4298    0.4009    0.3717    0.3420    0.3120    0.2817
+
+  Columns 92 through 98
+
+    0.2511    0.2203    0.1893    0.1580    0.1266    0.0951    0.0634
+
+  Columns 99 through 100
+
+    0.0317    0.0000
+
+Reprezentare eroare E=|f-Pn|
+ 
+ans =
+ 
+xp^99 + (97*xp^98)/99 + (95*xp^97)/99 + (31*xp^96)/33 + (91*xp^95)/99 + (89*xp^94)/99 + (29*xp^93)/33 + (85*xp^92)/99 + (83*xp^91)/99 + (9*xp^90)/11 + (79*xp^89)/99 + (7*xp^88)/9 + (25*xp^87)/33 + (73*xp^86)/99 + (71*xp^85)/99 + (23*xp^84)/33 + (67*xp^83)/99 + (65*xp^82)/99 + (7*xp^81)/11 + (61*xp^80)/99 + (59*xp^79)/99 + (19*xp^78)/33 + (5*xp^77)/9 + (53*xp^76)/99 + (17*xp^75)/33 + (49*xp^74)/99 + (47*xp^73)/99 + (5*xp^72)/11 + (43*xp^71)/99 + (41*xp^70)/99 + (13*xp^69)/33 + (37*xp^68)/99 + (35*xp^67)/99 + xp^66/3 + (31*xp^65)/99 + (29*xp^64)/99 + (3*xp^63)/11 + (25*xp^62)/99 + (23*xp^61)/99 + (7*xp^60)/33 + (19*xp^59)/99 + (17*xp^58)/99 + (5*xp^57)/33 + (13*xp^56)/99 + xp^55/9 + xp^54/11 + (7*xp^53)/99 + (5*xp^52)/99 + xp^51/33 + xp^50/99 - xp^49/99 - xp^48/33 - (5*xp^47)/99 - (7*xp^46)/99 - xp^45/11 - xp^44/9 - (13*xp^43)/99 - (5*xp^42)/33 - (17*xp^41)/99 - (19*xp^40)/99 - (7*xp^39)/33 - (23*xp^38)/99 - (25*xp^37)/99 - (3*xp^36)/11 - (29*xp^35)/99 - (31*xp^34)/99 - xp^33/3 - (35*xp^32)/99 - (37*xp^31)/99 - (13*xp^30)/33 - (41*xp^29)/99 - (43*xp^28)/99 - (5*xp^27)/11 - (47*xp^26)/99 - (49*xp^25)/99 - (17*xp^24)/33 - (53*xp^23)/99 - (5*xp^22)/9 - (19*xp^21)/33 - (59*xp^20)/99 - (61*xp^19)/99 - (7*xp^18)/11 - (65*xp^17)/99 - (67*xp^16)/99 - (23*xp^15)/33 - (71*xp^14)/99 - (73*xp^13)/99 - (25*xp^12)/33 - (7*xp^11)/9 - (79*xp^10)/99 - (9*xp^9)/11 - (83*xp^8)/99 - (85*xp^7)/99 - (29*xp^6)/33 - (89*xp^5)/99 - (91*xp^4)/99 - (31*xp^3)/33 - (95*xp^2)/99 - (97*xp)/99 - 1
+ 
+</pre><p class="footer"><br><a href="https://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2018b</a><br></p></div><!--
+##### SOURCE BEGIN #####
+%% Algoritmi utilizati
+disp('Metoda Hermite');
+type ('MetHer.m');
+disp('Metoda Neville');
+type('MetNeville.m');
+disp('Metoda Newton cu diferente divizate');
+type ('MetNewDD.m');
+%% Exercitiul 5
+f=@(x)sin(x)
+xmin=-pi/2;
+xmax=pi/2;
+X=linspace(xmin,xmax,3);
+Y=f(X);
+fp=@(x)cos(x)
+Z=fp(X);
+figure(1)
+plot(X,Y,'o','MarkerFaceColor','b','Markersize',10);
+x=linspace(xmin,xmax,100);
+for i=1:length(x)
+    [y(i),z(i)]=MetHer(X,Y,Z,x(i));
+end
+for i=1:length(x)
+    [y(i)]=MetNeville(X,Y,x(i),f);
+end
+for i=1:length(x)
+    [y(i)]=MetNewDD(X,Y,x(i),f);
+end
+Y=f(x)
+Z=fp(x)
+hold on
+plot(x,Y,'o','MarkerFaceColor','b','Markersize',10);
+grid on
+plot(x,y,'Linewidth',3);
+grid on
+figure(2)
+hold on;
+plot(x,Z,'o','MarkerFaceColor','b','Markersize',10);
+grid on
+plot(x,z,'Linewidth',3);
+grid on
+
+disp('Reprezentare eroare E=|f-Pn|');
+figure(3)
+syms xp;
+Pn=0;
+for i=1:length(x)
+    Pn=Pn+(y(i)*(xp^(i-1)));
+end
+Pn=matlabFunction(Pn,'vars',{xp});
+Pn(xp)
+E1=abs(f(xp)-Pn(xp));
+fplot(E1,[-pi/2,pi/2]);
+
+##### SOURCE END #####
+--></body></html>

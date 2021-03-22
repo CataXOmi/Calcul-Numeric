@@ -1,0 +1,196 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      --><title>EXC1</title><meta name="generator" content="MATLAB 9.5"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-04-21"><meta name="DC.source" content="EXC1.m"><style type="text/css">
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
+
+html { min-height:100%; margin-bottom:1px; }
+html body { height:100%; margin:0px; font-family:Arial, Helvetica, sans-serif; font-size:10px; color:#000; line-height:140%; background:#fff none; overflow-y:scroll; }
+html body td { vertical-align:top; text-align:left; }
+
+h1 { padding:0px; margin:0px 0px 25px; font-family:Arial, Helvetica, sans-serif; font-size:1.5em; color:#d55000; line-height:100%; font-weight:normal; }
+h2 { padding:0px; margin:0px 0px 8px; font-family:Arial, Helvetica, sans-serif; font-size:1.2em; color:#000; font-weight:bold; line-height:140%; border-bottom:1px solid #d6d4d4; display:block; }
+h3 { padding:0px; margin:0px 0px 5px; font-family:Arial, Helvetica, sans-serif; font-size:1.1em; color:#000; font-weight:bold; line-height:140%; }
+
+a { color:#005fce; text-decoration:none; }
+a:hover { color:#005fce; text-decoration:underline; }
+a:visited { color:#004aa0; text-decoration:none; }
+
+p { padding:0px; margin:0px 0px 20px; }
+img { padding:0px; margin:0px 0px 20px; border:none; }
+p img, pre img, tt img, li img, h1 img, h2 img { margin-bottom:0px; } 
+
+ul { padding:0px; margin:0px 0px 20px 23px; list-style:square; }
+ul li { padding:0px; margin:0px 0px 7px 0px; }
+ul li ul { padding:5px 0px 0px; margin:0px 0px 7px 23px; }
+ul li ol li { list-style:decimal; }
+ol { padding:0px; margin:0px 0px 20px 0px; list-style:decimal; }
+ol li { padding:0px; margin:0px 0px 7px 23px; list-style-type:decimal; }
+ol li ol { padding:5px 0px 0px; margin:0px 0px 7px 0px; }
+ol li ol li { list-style-type:lower-alpha; }
+ol li ul { padding-top:7px; }
+ol li ul li { list-style:square; }
+
+.content { font-size:1.2em; line-height:140%; padding: 20px; }
+
+pre, code { font-size:12px; }
+tt { font-size: 1.2em; }
+pre { margin:0px 0px 20px; }
+pre.codeinput { padding:10px; border:1px solid #d3d3d3; background:#f7f7f7; }
+pre.codeoutput { padding:10px 11px; margin:0px 0px 20px; color:#4c4c4c; }
+pre.error { color:red; }
+
+@media print { pre.codeinput, pre.codeoutput { word-wrap:break-word; width:100%; } }
+
+span.keyword { color:#0000FF }
+span.comment { color:#228B22 }
+span.string { color:#A020F0 }
+span.untermstring { color:#B20000 }
+span.syscmd { color:#B28C00 }
+
+.footer { width:auto; padding:10px 0px; margin:25px 0px 0px; border-top:1px dotted #878787; font-size:0.8em; line-height:140%; font-style:italic; color:#878787; text-align:left; float:none; }
+.footer p { margin:0px; }
+.footer a { color:#878787; }
+.footer a:hover { color:#878787; text-decoration:underline; }
+.footer a:visited { color:#878787; }
+
+table th { padding:7px 5px; text-align:left; vertical-align:middle; border: 1px solid #d6d4d4; font-weight:bold; }
+table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px solid #d6d4d4; }
+
+
+
+
+
+  </style></head><body><div class="content"><h2>Contents</h2><div><ul><li><a href="#1">Algoritmi utilizati</a></li><li><a href="#2">EXC 1</a></li></ul></div><h2 id="1">Algoritmi utilizati</h2><pre class="codeinput">disp(<span class="string">'Metoda Newton'</span>);
+type (<span class="string">'MetNewton.m'</span>);
+</pre><pre class="codeoutput">Metoda Newton
+
+function [ xaprox,N ] = MetNewton( F,J,x0,eps )
+    k=0;
+    xold=x0;
+    while 1
+        k=k+1;
+        % sistem J(x(k-1))z=-F(x(k-1))
+        % J(xold)z=-F(xold)
+        % J(xold(1),xold(2))z=-F(xold(1),xold(2))
+        % z=J(xold(1),xold(2))\-F(xold(1),xold(2));
+         z=inv(J(xold(1),xold(2)))*-F(xold(1),xold(2));
+        xnew=xold+z;
+        if norm(z,2) &lt; eps
+            break;
+        end
+        xold=xnew;
+    end
+    xaprox=xnew;
+    N=k;
+end
+
+</pre><h2 id="2">EXC 1</h2><p>Jacobianul sistemului</p><pre class="codeinput">syms <span class="string">x</span> <span class="string">y</span>;
+f1=x.^2+y.^2-4;
+f2=(x.^2)/8-y;
+Js=[diff(f1,x) diff(f1,y);
+    diff(f2,x) diff(f2,y)];
+Js=matlabFunction(Js,<span class="string">'vars'</span>,{x,y});
+Js(x,y)
+Jf=jacobian([f1; f2],[x, y])
+</pre><pre class="codeoutput"> 
+ans =
+ 
+[ 2*x, 2*y]
+[ x/4,  -1]
+ 
+ 
+Jf =
+ 
+[ 2*x, 2*y]
+[ x/4,  -1]
+ 
+</pre><p>Reprezentarea celor 2 curbe</p><pre class="codeinput">f1=@(x,y)x.^2+y.^2-4;
+fimplicit(f1,[-3,3,-3,3])
+grid <span class="string">on</span>
+hold <span class="string">on</span>
+axis <span class="string">equal</span>
+f2=@(x,y)(x.^2)/8-y;
+fimplicit(f2,[-3,3,-3,3]);
+</pre><img vspace="5" hspace="5" src="EXC1_01.png" alt=""> <p>Determinarea punctelor de intersectie cu ajutorul metodei Newton</p><pre class="codeinput">F=@(x,y)[x.^2+y.^2-4;x.^2/8-y]
+x0=[-2;0];
+eps=10^(-6);
+[r1,N1]=MetNewton(F,Js,x0,eps)
+x0=[2;0];
+[r2,N2]=MetNewton(F,Js,x0,eps)
+</pre><pre class="codeoutput">
+F =
+
+  function_handle with value:
+
+    @(x,y)[x.^2+y.^2-4;x.^2/8-y]
+
+
+r1 =
+
+   -1.9435
+    0.4721
+
+
+N1 =
+
+     4
+
+
+r2 =
+
+    1.9435
+    0.4721
+
+
+N2 =
+
+     4
+
+</pre><p>Reprezentarea punctelor de intersectie pe graficul curbelor</p><pre class="codeinput">plot(r1(1),r1(2),<span class="string">'o'</span>,<span class="string">'MarkerFaceColor'</span>,<span class="string">'r'</span>,<span class="string">'Markersize'</span>,10);
+plot(r2(1),r2(2),<span class="string">'o'</span>,<span class="string">'MarkerFaceColor'</span>,<span class="string">'r'</span>,<span class="string">'Markersize'</span>,10);
+</pre><img vspace="5" hspace="5" src="EXC1_02.png" alt=""> <p class="footer"><br><a href="https://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2018b</a><br></p></div><!--
+##### SOURCE BEGIN #####
+%% Algoritmi utilizati
+disp('Metoda Newton');
+type ('MetNewton.m');
+%% EXC 1
+% Jacobianul sistemului
+syms x y;
+f1=x.^2+y.^2-4;
+f2=(x.^2)/8-y;
+Js=[diff(f1,x) diff(f1,y);
+    diff(f2,x) diff(f2,y)];
+Js=matlabFunction(Js,'vars',{x,y});
+Js(x,y)
+Jf=jacobian([f1; f2],[x, y])
+%%
+% Reprezentarea celor 2 curbe
+f1=@(x,y)x.^2+y.^2-4;
+fimplicit(f1,[-3,3,-3,3])
+grid on
+hold on
+axis equal
+f2=@(x,y)(x.^2)/8-y;
+fimplicit(f2,[-3,3,-3,3]);
+%%
+% Determinarea punctelor de intersectie cu ajutorul metodei Newton
+F=@(x,y)[x.^2+y.^2-4;x.^2/8-y]
+x0=[-2;0];
+eps=10^(-6);
+[r1,N1]=MetNewton(F,Js,x0,eps)
+x0=[2;0];
+[r2,N2]=MetNewton(F,Js,x0,eps)
+%%
+% Reprezentarea punctelor de intersectie pe graficul curbelor
+plot(r1(1),r1(2),'o','MarkerFaceColor','r','Markersize',10);
+plot(r2(1),r2(2),'o','MarkerFaceColor','r','Markersize',10);
+
+
+##### SOURCE END #####
+--></body></html>
