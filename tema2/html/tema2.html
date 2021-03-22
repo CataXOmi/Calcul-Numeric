@@ -1,0 +1,1102 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      --><title>Functii | Calcul Simbolic</title><meta name="generator" content="MATLAB 9.5"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-03-23"><meta name="DC.source" content="tema2.m"><style type="text/css">
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
+
+html { min-height:100%; margin-bottom:1px; }
+html body { height:100%; margin:0px; font-family:Arial, Helvetica, sans-serif; font-size:10px; color:#000; line-height:140%; background:#fff none; overflow-y:scroll; }
+html body td { vertical-align:top; text-align:left; }
+
+h1 { padding:0px; margin:0px 0px 25px; font-family:Arial, Helvetica, sans-serif; font-size:1.5em; color:#d55000; line-height:100%; font-weight:normal; }
+h2 { padding:0px; margin:0px 0px 8px; font-family:Arial, Helvetica, sans-serif; font-size:1.2em; color:#000; font-weight:bold; line-height:140%; border-bottom:1px solid #d6d4d4; display:block; }
+h3 { padding:0px; margin:0px 0px 5px; font-family:Arial, Helvetica, sans-serif; font-size:1.1em; color:#000; font-weight:bold; line-height:140%; }
+
+a { color:#005fce; text-decoration:none; }
+a:hover { color:#005fce; text-decoration:underline; }
+a:visited { color:#004aa0; text-decoration:none; }
+
+p { padding:0px; margin:0px 0px 20px; }
+img { padding:0px; margin:0px 0px 20px; border:none; }
+p img, pre img, tt img, li img, h1 img, h2 img { margin-bottom:0px; } 
+
+ul { padding:0px; margin:0px 0px 20px 23px; list-style:square; }
+ul li { padding:0px; margin:0px 0px 7px 0px; }
+ul li ul { padding:5px 0px 0px; margin:0px 0px 7px 23px; }
+ul li ol li { list-style:decimal; }
+ol { padding:0px; margin:0px 0px 20px 0px; list-style:decimal; }
+ol li { padding:0px; margin:0px 0px 7px 23px; list-style-type:decimal; }
+ol li ol { padding:5px 0px 0px; margin:0px 0px 7px 0px; }
+ol li ol li { list-style-type:lower-alpha; }
+ol li ul { padding-top:7px; }
+ol li ul li { list-style:square; }
+
+.content { font-size:1.2em; line-height:140%; padding: 20px; }
+
+pre, code { font-size:12px; }
+tt { font-size: 1.2em; }
+pre { margin:0px 0px 20px; }
+pre.codeinput { padding:10px; border:1px solid #d3d3d3; background:#f7f7f7; }
+pre.codeoutput { padding:10px 11px; margin:0px 0px 20px; color:#4c4c4c; }
+pre.error { color:red; }
+
+@media print { pre.codeinput, pre.codeoutput { word-wrap:break-word; width:100%; } }
+
+span.keyword { color:#0000FF }
+span.comment { color:#228B22 }
+span.string { color:#A020F0 }
+span.untermstring { color:#B20000 }
+span.syscmd { color:#B28C00 }
+
+.footer { width:auto; padding:10px 0px; margin:25px 0px 0px; border-top:1px dotted #878787; font-size:0.8em; line-height:140%; font-style:italic; color:#878787; text-align:left; float:none; }
+.footer p { margin:0px; }
+.footer a { color:#878787; }
+.footer a:hover { color:#878787; text-decoration:underline; }
+.footer a:visited { color:#878787; }
+
+table th { padding:7px 5px; text-align:left; vertical-align:middle; border: 1px solid #d6d4d4; font-weight:bold; }
+table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px solid #d6d4d4; }
+
+
+
+
+
+  </style></head><body><div class="content"><h1>Functii | Calcul Simbolic</h1><!--introduction--><!--/introduction--><h2>Contents</h2><div><ul><li><a href="#1">Functii</a></li><li><a href="#2">Definirea functiilor</a></li><li><a href="#4">Instructiunea global</a></li><li><a href="#5">Variabile handle de functii</a></li><li><a href="#19">Vectorizarea functiilor</a></li><li><a href="#21">Aplicarea functiilor asupra tablourilor de celule</a></li><li><a href="#24">Calcul simbolic</a></li><li><a href="#25">Definirea variabilelor si functiilor simbolice</a></li><li><a href="#32">Substitutii</a></li><li><a href="#38">Reprezentarea simbolica a numerelor</a></li><li><a href="#44">Definirea de variabile simbolice reale si complexe</a></li><li><a href="#48">Matrice simbolice</a></li><li><a href="#64">Crearea de functii abstracte</a></li><li><a href="#65">Reprezentarea grafica a functiilor</a></li></ul></div><h2 id="1">Functii</h2><h2 id="2">Definirea functiilor</h2><p>Functiile se definesc &icirc;n fisiere cu extensia .m . Linia de definitie a unei functii este : <b>function [y1, y2, &#8230;, yn ] = numefunctie (x1, x2, &#8230; xk)</b>. Variabilele x1, x2, &#8230;, xk sunt parametri de intrare. Variabilele y1, y2, &#8230;, yn sunt calculate de functie si sunt parametrii de iesire. Parametrii din definitia functiei se numesc formali. Functiile pot avea propriile variabile locale. Functiile opereaza asupra variabilelor din propriul lor spatiu, adica variabilele locale si parametrii.</p><p>Exemplu</p><pre class="codeinput">[a, b] = patrcub(2)
+</pre><pre class="codeoutput">
+a =
+
+     4
+
+
+b =
+
+     8
+
+</pre><p>O functie este apelata ca termen intr-o expresie. Parametrii formali din definitia functiei sunt inlocuiti la apelare cu parametrii actuali. Parametrii de intrare actuali pot fi expresii ce contin constante, variabile sau functii. De exemplu, functia de mai sus este apelata ca [a, b] = pc(2).</p><p>Orice functie are 2 parametri impliciti de intrare:</p><p>-&gt; <b>nargin</b> &#8211; numarul de parametri de intrare;</p><p>-&gt; <b>nargout</b> &#8211; numarul de parametri de iesire.</p><p>Executia unei functii se termina in mod normal la sfarsitul functiei. Pentru a termina executia functiei mai inainte se utilizeaza instructiunea <b>return</b>.</p><p>Functiile sunt salvate in fisiere ce au numele functiei si extensia <b>.m</b> . Intr-un fisier <b>.m</b> se pot defini mai multe functii, apelate de prima functie definita in fisier.</p><h2 id="4">Instructiunea global</h2><p>Instructiunea <b>global</b> se utilizeaza pentru a defini variabile globale. Daca mai multe functii si spatiul de baza trebuie sa utilizeze aceeasi variabila, aceasta variabila trebuie declarata globala, in fiecare functie si in spatiul de baza. La atribuirea unei valori acestei variabile in orice functie sau in spatiul de baza, valoarea este accesibila tuturor functiilor si spatiul de baza ce au declarat variabila ca globala.</p><p>Forma instructiunii <b>global</b> este : global  v1 v2 &#8230; .</p><p>Exemplu :</p><p>Fie functia urmatoare ce utilizeaza o variabila globala numita comp ce contine o matrice.</p><p>Programul urmator citeste o matrice in variabila globala comp si apoi apeleaza functia <b>fcn</b>.</p><p>Se declara variabila globala comp</p><pre class="codeinput">		<span class="keyword">global</span> comp
+    <span class="comment">% citeste datele din fisierul comp.txt &icirc;n matricea comp</span>
+		load <span class="string">comp.txt</span>
+		x = [1, 2] ;
+		fcn(x)
+</pre><pre class="codeoutput">
+ans =
+
+    11
+
+</pre><h2 id="5">Variabile handle de functii</h2><p>O variabila de tip handle de functii contine toate informatiile necesare despre o functie care trebuie apelata mai tarziu. De obicei, o variabila de tip handle de functii este pasata ca argument unei alte functii.</p><p>Instructiunea	<b>fh = @numefunctie</b> memoreaza in variabila fh un handle al functiei numefunctie. Variabila fh poate fi pasata ca argument altei functii. Apelarea functiei numefunctie pasata printr-o variabila handle se face astfel : <b>fh (lista de parametri)</b> unde lista de parametri contine parametrii actuali ai functiei  numefunctie.</p><p>Exemplu:</p><p>Fie functia fun1(x) care calculeaza valoarea (x + 1) ^ 2. Functia este memorata in fisierul <b>fun1.m</b> .</p><p>Sa calculam valoarea fun1(1.3). Functia poate fi apelata in doua moduri:</p><p>&#8226; ca o expresie in membrul drept al unei instructiuni de atribuire:</p><pre class="codeinput">                    z = fun1(1.3)
+</pre><pre class="codeoutput">
+z =
+
+    5.2900
+
+</pre><p>&#8226; printr-o variabila handle:</p><pre class="codeinput">                    fh = @fun1;
+                    z = fh(1.3)
+</pre><pre class="codeoutput">
+z =
+
+    5.2900
+
+</pre><p>Exemplu:</p><p>Fie functia fun2(x,y) ce calculeaza suma si suma patratelor a doua numere. Functia este memorata in fisierul <b>fun2.m</b> .</p><p>Vom apela functia cu valorile x=2.1, y=-0.8:</p><p>&#8226; ca o expresie in membrul drept al unei instructiuni de atribuire:</p><pre class="codeinput">                [z1 z2] = fun2(2.1, -0.8)
+</pre><pre class="codeoutput">
+z1 =
+
+    1.3000
+
+
+z2 =
+
+    5.0500
+
+</pre><p>&#8226; printr-o variabila handle:</p><pre class="codeinput">                hf = @fun2;
+                [z1 z2] = hf(2.1, -0.8)
+</pre><pre class="codeoutput">
+z1 =
+
+    1.3000
+
+
+z2 =
+
+    5.0500
+
+</pre><p>In exemplele anterioare, functiile erau definite in fisiere <b>.m</b> . Este posibil sa definim in program functii limitate la o singura expresie, fara nume, si sa le atribuim unei variabile handle. Ele sunt apelate prin variabila handle, ca mai inainte. Asemenea functii fara nume se numesc <b>anonime</b> . Definitia unei functii anonime este <b>@(lista parametrilor formali de intrare) expresia functiei</b> .</p><p>Exemplu:</p><p>Sa definim o functie anonima ce calculeaza expresia (x+1)^2 si sa o apelam cu x=2.1 .</p><pre class="codeinput">            fx = @(x)(x+1)^2 ;
+            z = fx(2.1)
+</pre><pre class="codeoutput">
+z =
+
+    9.6100
+
+</pre><p>Exemplu:</p><p>Sa definim o functie anonima care calculeaza suma si suma patratelor a doua numere in vectorul [x+y, x^2+y^2]. O vom apela cu valorile 1.3 si -0.8.</p><pre class="codeinput">                    fz=@(x,y)[x+y, x^2+y^2] ;
+                    [z]=fz(1.3,-0.8)
+</pre><pre class="codeoutput">
+z =
+
+    0.5000    2.3300
+
+</pre><p>O functie definita intr-un fisier <b>.m</b> poate avea ca parametru de intrare o variabila handle. Variabila handle se poate initializa cu o functie definita intr-un fisier <b>.m</b> , cu o functie anonima, sau cu o functie standard Matlab. In acest fel, o functie poate avea ca parametri alte functii. Fie <b>fcn</b> o functie ce are ca parametru o alta functie: x = fcn(f, lista de parametri). Aici f este o variabila handle, iar lista de parametri va contine parametrii lui f si alti parametri ai functiei fcn. Fie <b>fun</b> o functie ce va fi pasata ca parametru functiei fcn.</p><p>Apelarea functiei <b>fcn</b> se face cu urmatoarea secventa de instructiuni:</p><p>&#8226; creaza variabila handle f</p><p>f = @fun ;</p><p>&#8226; paseaza variabila handle si lista de parametri actuali ai functiilor fcn si fun</p><p>x = fcn(f, lista de parametri actuali);</p><p>Exemplu:</p><p>Fie functia <b>funb(x)</b> ce va calcula expresia <b>sin(f(x))</b> , unde f(x) este o functie oarecare, ce va fi parametru al functiei funb. Functia funb este memorata in fisierul <b>funb.m</b> .</p><p>Vrem sa calculam expresiile sin(x^2) si sin(x^3) cu x = 2.1 . Vom defini functia <b>funa</b> ce calculeaza valoarea x^3 si <b>func</b> care calculeaza valoarea x^2.</p><p>Apelam functia funb cu primul parametru handle al functiei funa si al doilea parametru 2.1 si obtinem:</p><pre class="codeinput">        fh=@funa
+        z=funb(fh,2.1)
+</pre><pre class="codeoutput">
+fh =
+
+  function_handle with value:
+
+    @funa
+
+
+z =
+
+    0.1630
+
+</pre><p>Apelam functia funb cu primul parametru handle al functiei func si al doilea parametru 2.1 si obtinem:</p><pre class="codeinput">        fh=@func
+        z=funb(fh,2.1)
+</pre><pre class="codeoutput">
+fh =
+
+  function_handle with value:
+
+    @func
+
+
+a =
+
+    4.4100
+
+
+z =
+
+   -0.9546
+
+</pre><p>Exemplul de mai sus are rolul de a exemplifica utilizarea functiilor Matlab ce au ca parametri alte functii. In cazul in care functia ce este parametru este simpla, putem utiliza o functie anonima ca parametru.</p><pre class="codeinput">        z = funb(@(x)x^3, 2.1)
+</pre><pre class="codeoutput">
+z =
+
+    0.1630
+
+</pre><p>Limbajul Matlab are functia standard <b>feval</b> care se utilizeaza pentru evaluarea functiilor standard si a celor utilizator din fisierele <b>.m</b> . Functia feval utilizeaza o variabila tip handle pentru a evalua functiile. Functia feval are forma: <b>feval(handle, arg1, arg2, &#8230;, argn)</b>, unde:</p><p>handle &#8211; variabila handle a functiei ce va fi evaluata;</p><p>arg1, arg2, ..., argn &#8211; parametrii functiei ce va fi evaluata.</p><p>Vom rescrie exemplele de mai sus utilizand functia feval. Fie functia <b>funb2</b> ce calculeaza expresia sin(f(x)).</p><p>Functia funb2 este apelata pentru a calcula sin(2.1^3) astfel:</p><pre class="codeinput">            fh=@funa;
+            b=funb2(fh,2.1)
+</pre><pre class="codeoutput">
+b =
+
+    0.1630
+
+</pre><p>Varianta II</p><p>Functia funb3 este apelata pentru a calcula sin(2.1^2) astfel:</p><pre class="codeinput">            fh=@func;
+            b=funb3(fh,2.1)
+</pre><pre class="codeoutput">
+a =
+
+    4.4100
+
+
+b =
+
+   -0.9546
+
+</pre><p>Functia feval poate evalua si functii anonime. De exemplu, pentru a calcula valoarea expresiei x^3 pentru x=1.5 putem scrie:</p><pre class="codeinput">            feval(@(x)x^3,1.5)
+</pre><pre class="codeoutput">
+ans =
+
+    3.3750
+
+</pre><p>Matlab are functia predefinita <b>functions</b> ce are ca parametru o variabila tip handle de functii si ca rezultat o structura cu informatiile despre functia continuta in variabila handle. De exemplu, pentru a obtine structura cu informatii despre functia funa vom scrie:</p><pre class="codeinput">			a = functions(@funa)
+</pre><pre class="codeoutput">
+a = 
+
+  struct with fields:
+
+    function: 'funa'
+        type: 'simple'
+        file: 'E:\FACULTATE\ANUL I SEM II\Calcul Numeric\Teme\tema2\funa.m'
+
+</pre><p>Pentru a afla doar fisierul in care este definita functia vom afisa campul <b>file</b> al structurii <b>a</b> in felul urmator:</p><pre class="codeinput">            a.file
+</pre><pre class="codeoutput">
+ans =
+
+    'E:\FACULTATE\ANUL I SEM II\Calcul Numeric\Teme\tema2\funa.m'
+
+</pre><h2 id="19">Vectorizarea functiilor</h2><p>Toate functiile standard Matlab pot fi aplicate asupra vectorilor si matricelor. In acest caz functia se aplica asupra fiecarui element al vectorului sau matricei (vectorizarea functiei). Fie de exemplu vectorul:</p><pre class="codeinput">            a=[1.1, -2.3, pi]
+</pre><pre class="codeoutput">
+a =
+
+    1.1000   -2.3000    3.1416
+
+</pre><pre class="codeinput">            b=sin(a)
+</pre><pre class="codeoutput">
+b =
+
+    0.8912   -0.7457    0.0000
+
+</pre><h2 id="21">Aplicarea functiilor asupra tablourilor de celule</h2><p>Functia <b>cellfun()</b> permite sa aplicam o functie asupra fiecarui element al unui tablou de celule. Atunci cand rezultatul functiei este un scalar si valorile scalare pot fi concatenate intr-un tablou, cellfun() are forma: <b>A = cellfun(fun, C1, C2, &#8230;)</b>, unde Ci sunt tablouri de celule, iar fun este o variabila handle de functie ce se aplica asupra fiecarei celule din Ci.</p><p>Exemplu:</p><p>Sa calculam lungimea tablourilor din celulele vectorului X</p><pre class="codeinput">    X={1:10, [2; 4; 6]}
+    cellfun(@length,X)
+</pre><pre class="codeoutput">
+X =
+
+  1&times;2 cell array
+
+    {1&times;10 double}    {3&times;1 double}
+
+
+ans =
+
+    10     3
+
+</pre><p>Functia cellfun are si forma: A = cellfun(fun, C1, C2, &#8230; &#8216;Param1&#8217;, val1, &#8230;), unde <b>Parami</b> sunt parametri, iar <b>vali</b> sunt valorile acestor parametri.</p><p>Atunci cand functia fun nu are ca rezultat un scalar, sau rezultatele nu pot fi concatenate intr-un tablou, utilizam parametrul <b>UniformOutput</b> pus la valoarea false. Exemplu:</p><p>Sa aplicam functia abs asupra elementelor vectorului de celule X. Rezultatul aplicarii functiei abs asupra unei celule este un vector.</p><pre class="codeinput">    R = cellfun(@abs, X, <span class="string">'UniformOutput'</span> , false)
+</pre><pre class="codeoutput">
+R =
+
+  1&times;2 cell array
+
+    {1&times;10 double}    {3&times;1 double}
+
+</pre><pre class="codeinput">    celldisp(R)
+</pre><pre class="codeoutput"> 
+R{1} =
+ 
+     1     2     3     4     5     6     7     8     9    10
+
+ 
+ 
+R{2} =
+ 
+     2
+     4
+     6
+
+ 
+</pre><h2 id="24">Calcul simbolic</h2><h2 id="25">Definirea variabilelor si functiilor simbolice</h2><p>Calculul simbolic opereaza cu obiecte simbolice: variabile, matrice si expresii simbolice. Variabilele simbolice se definesc in doua feluri:</p><p>&#8226; cu instructiunea <b>syms</b>, care defineste variabile simbolice;</p><p>&#8226; orice variabila ce primeste ca valoare o expresie simbolica devine o variabila simbolica; atribuirea de valori unei variabile se face cu operatorul <b>"="</b>.</p><p>Instructiunea syms are forma: <b>syms var var var ...</b> , unde var sunt nume de variabile simbolice.</p><p>Exemplu:</p><p>Definim variabilele simbolice a,b si c cu instructiunea syms si atribuim variabilei a ca valoare expresia simbolica <b>b+c</b> .</p><pre class="codeinput">    syms <span class="string">a</span> <span class="string">b</span> <span class="string">c</span>
+    a=b+c
+</pre><pre class="codeoutput"> 
+a =
+ 
+b + c
+ 
+</pre><p>Fie instructiunea <b>m=b+c</b>, m este acum o variabila simbolica, deoarece a primit ca valoare o expresie simbolica.</p><p>Expresiile simbolice se definesc la fel ca expresiile aritmetice din Matlab, in care variabilele numerice sunt inlocuite cu variabile simbolice. Se includ aici si vectorii si matricele cu elemente expresii simbolice, asupra carora se pot efectua calcule simbolice analoge calculelor numerice din Matlab.</p><p>Expresiile simbolice au ca termeni variabile simbolice si functii simbolice si ca operatori aritmetici: <b>+, -, *, /, \, ^</b> . Operatorii, +, -, <b>, /, sunt cei patru operatori aritmetici cunoscuti. Operatia *"a \ b"</b> se defineste ca (1/a)*b. Operatorul <b>"^"</b> este ridicarea la putere.</p><p>Prioritatile operatorilor aritmetici sunt cele cunoscute. Operatorii + si &#8211; unari au cea mai mare prioritate, urmati de operatorii *, /, \, ^, iar operatorii + si &#8211; binari au cea mai mica prioritate. Operatorii unari sunt asociativi la dreapta, operatorii binari sunt asociativi la stanga. In cadrul expresiilor aritmetice se pot utiliza paranteze rotunde, ( si ), pentru a modifica prioritatile operatorilor.</p><p>Functiile matematice uzuale ce se pot utiliza in expresiile simbolice sunt cele de mai jos :</p><p>sin asin sqrt exp</p><p>cos acos abs log</p><p>tan atan log10</p><p>Exista inca un mod de a crea expresii simbolice, functia <b>sym</b> . Aceasta functie are forma <b>sym(' expresie simbolica')</b> si are ca rezultat o expresie simbolica ce poate fi atribuita unei variabile simbolice. Reamintim ca o expresie simbolica are ca termeni variabile simbolice, definite anterior.</p><p>Exemple:</p><p>Sa definim functia simbolica liniara <b>f(x) = a * x + b</b> . Primul mod de a defini functia este de a defini variabilele simbolice a, x, b si f cu instruc?iunea syms si apoi atribuim lui f ca valoare expresia simbolica:</p><pre class="codeinput">    syms <span class="string">a</span> <span class="string">x</span> <span class="string">b</span> <span class="string">f</span>;
+    f = a * x + b
+</pre><pre class="codeoutput"> 
+f =
+ 
+b + a*x
+ 
+</pre><p>Al doilea mod defineste expresia simbolica cu functia sym:</p><p>syms a x b f;</p><p>f = sym ('a * x + b');</p><p>In unele cazuri trebuie sa cream expresii simbolice in care intervin constante. Acest lucru se face cu functia sym. De exemplu, pentru a crea o functie simbolica constanta ce are valoarea 3 vom scrie:</p><pre class="codeinput">    f=sym(<span class="string">'3'</span>)
+</pre><pre class="codeoutput"> 
+f =
+ 
+3
+ 
+</pre><p>sau</p><pre class="codeinput">    f= sym(3)
+</pre><pre class="codeoutput"> 
+f =
+ 
+3
+ 
+</pre><p>Exemplu:</p><p>Vom defini variabilele simbolice a, b ?i x si polinoamele simbolice f(x) = a*x^2 + 2 si g(x) = x + b si vom calcula produsul lor, f(x) * g(x). Programul este urmatorul:</p><pre class="codeinput">    syms <span class="string">a</span> <span class="string">b</span> <span class="string">x</span> <span class="string">f</span> <span class="string">g</span>;
+    f = a *x^2+2
+    g = x + b
+    f * g
+</pre><pre class="codeoutput"> 
+f =
+ 
+a*x^2 + 2
+ 
+ 
+g =
+ 
+b + x
+ 
+ 
+ans =
+ 
+(b + x)*(a*x^2 + 2)
+ 
+</pre><p>Exemplu:</p><p>Sa definim variabila simbolica x si functia simbolica g(x) = radical din x^2+x+1.</p><pre class="codeinput">    syms <span class="string">x</span> <span class="string">g</span>;
+    g = sqrt(x^2 + x + 1)
+</pre><pre class="codeoutput"> 
+g =
+ 
+(x^2 + x + 1)^(1/2)
+ 
+</pre><h2 id="32">Substitutii</h2><p>Este posibil sa atribuim valori numerice variabilelor simbolice si, in acest caz, expresiile simbolice sunt evaluate la valoarea numerica corespunzatoare. Aceste substitutii ale variabilelor simbolice cu valori numerice se fac cu functia <b>subs</b> cu formele: <b>subs(expresie simbolica, variabila simbolica, valoare numerica)</b> , in cazul cand substituim o singura variabila, si <b>subs(expresie simbolica, {variabile simbolice}, {valori numerice})</b> , in cazul cand substituim mai multe variabile.</p><p>Exemplu:</p><p>Fie functia simbolica f(x)=x^2 - 3*x + 2. Vom substitui variabila simbolica x cu valoarea 2.</p><pre class="codeinput">syms <span class="string">f</span> <span class="string">x</span>;
+f = x^2 - 3 * x + 2;
+subs(f, x, 2)
+subs(f, x, -2)
+</pre><pre class="codeoutput"> 
+ans =
+ 
+0
+ 
+ 
+ans =
+ 
+12
+ 
+</pre><p>Exemplu:</p><p>Fie functia de doua variabile f(x,y)=x^2+x*y. Vom substitui variabila simbolica x cu 2.</p><pre class="codeinput">syms <span class="string">x</span> <span class="string">y</span> <span class="string">f</span>;
+f = x^2 + x * y;
+subs(f, x, 2)
+subs(f, y, 3)
+subs(f, {x, y}, {-1,2})
+</pre><pre class="codeoutput"> 
+ans =
+ 
+2*y + 4
+ 
+ 
+ans =
+ 
+x^2 + 3*x
+ 
+ 
+ans =
+ 
+-1
+ 
+</pre><p>Reamintim ca, lista cu variabilele simbolice ce vor fi substituite si lista cu valori sunt incluse intre acolade, { }. In cazul cand substituim o singura variabila simbolica cu o valoare, functia subs are si urmatoarea forma simpla: <b>subs(expresie simbolica, valoare numerica)</b> .</p><p>Daca expresia simbolica depinde de mai mult de o variabila si variabila pentru care se face substitutia nu este specificata, substitutia se face pentru variabila simbolica implicita, care se alege dupa urmatoarea regula:</p><p>-&gt; se alege litera cea mai apropiata de x din alfabet;</p><p>-&gt; daca exista doua litere egal departate de x, se alege ultima din alfabet din cele doua.</p><p>Exemplu:</p><pre class="codeinput">syms <span class="string">x</span> <span class="string">t</span>;
+f = t^2 * cos(x + t)
+subs(f,2)
+</pre><pre class="codeoutput"> 
+f =
+ 
+t^2*cos(t + x)
+ 
+ 
+ans =
+ 
+t^2*cos(t + 2)
+ 
+</pre><p>Dupa cum se observa, se substituie variabila simbolica x cu valoarea 2, aleasa dupa regula de mai sus.</p><p>Variabilele simbolice dintr-o expresie se pot determina cu functia <b>findsym</b> .</p><p>Exemplu:</p><pre class="codeinput">syms <span class="string">t</span> <span class="string">omega</span> <span class="string">psi</span> <span class="string">f</span> <span class="string">x</span> <span class="string">g</span>;
+f = cos(omega * t + psi);
+g = x^3 - x +1
+findsym(f)
+findsym(g)
+</pre><pre class="codeoutput"> 
+g =
+ 
+x^3 - x + 1
+ 
+Warning: FINDSYM will be removed in a future
+release. Use SYMVAR instead. 
+
+ans =
+
+    'omega,psi,t'
+
+Warning: FINDSYM will be removed in a future
+release. Use SYMVAR instead. 
+
+ans =
+
+    'x'
+
+</pre><p>Variabila simbolica implicita dintr-o expresie f se poate determina cu functia <b>findsym(f,1)</b> .</p><p>Exemplu:</p><pre class="codeinput">syms <span class="string">x</span> <span class="string">t</span>;
+f = t^2 * cos(x + t)
+findsym(f, 1)
+</pre><pre class="codeoutput"> 
+f =
+ 
+t^2*cos(t + x)
+ 
+Warning: FINDSYM will be removed in a future
+release. Use SYMVAR instead. 
+
+ans =
+
+    'x'
+
+</pre><p>Mentionam ca pentru afisarea expresiilor simbolice intr-un format apropiat de cel din matematica se utilizeaza functia <b>pretty</b> ce are ca parametru expresia simbolica.</p><h2 id="38">Reprezentarea simbolica a numerelor</h2><p>Numerele se reprezinta simbolic in urmatoarele feluri:</p><p>-&gt; in virgula mobila, sub forma unei mantise inmultita cu 2 la un anumit exponent; mantisa contine 13 cifre hexazecimale;</p><p>-&gt; ca numar rational, ca raport a doua numere intregi;</p><p>-&gt; ca numar rational plus precizia relativa; precizia relativa este diferenta intre valoarea numarului rational si valoarea lui reprezentata in virgula mobila, si este exprimata in functie de eps, precizia reprezentarii numerelor in virgula mobila;</p><p>-&gt; ca numar zecimal cu un numar specificat de cifre semnificative; implicit, numarul de cifre este 32, dar el poate fi specificat cu functia <b>digits</b> dupa cum se arata mai jos. Conversia intre numar si reprezentarea sa simbolica se face cu functia <b>sym</b> cu un parametru ce specifica tipul reprezentarii simbolica dupa cum se arata mai jos.</p><p>in virgula mobila -&gt; sym(x, 'f');</p><p>ca numar rational	-&gt; sym(x, 'r');</p><p>ca numar rational plus precizia relativa -&gt; sym(x, 'e');</p><p>ca numar zecimal cu un numar specificat de cifre semnificative -&gt; sym(x, 'd').</p><p>Operatiile cu numere rationale se fac dupa regulile din aritmetica.</p><p>Exemplu:</p><pre class="codeinput">    sym(2)/sym(3) + sym(4)/sym(5)
+</pre><pre class="codeoutput"> 
+ans =
+ 
+22/15
+ 
+</pre><p>Exemplu:</p><p>Fie numarul 0.2, a carui valoare va fi convertita intr-un numar symbolic in formele de mai sus.</p><pre class="codeinput">sym(0.2, <span class="string">'f'</span>)
+</pre><pre class="codeoutput"> 
+ans =
+ 
+3602879701896397/18014398509481984
+ 
+</pre><pre class="codeinput">sym(0.2, <span class="string">'r'</span>)
+</pre><pre class="codeoutput"> 
+ans =
+ 
+1/5
+ 
+</pre><pre class="codeinput">sym(0.2, <span class="string">'e'</span>)
+</pre><pre class="codeoutput"> 
+ans =
+ 
+eps/20 + 1/5
+ 
+</pre><pre class="codeinput">sym(0.2, <span class="string">'d'</span>)
+</pre><pre class="codeoutput"> 
+ans =
+ 
+0.2
+ 
+</pre><pre class="codeinput">digits(10)
+sym(0.2, <span class="string">'d'</span>)
+</pre><pre class="codeoutput"> 
+ans =
+ 
+0.2
+ 
+</pre><h2 id="44">Definirea de variabile simbolice reale si complexe</h2><p>O variabila complexa este o pereche ordonata de doua variabile reale. Fie x si y doua variabile reale. O variabila complexa este z = x + i * y, unde x este partea reala, y este partea imaginara a variabilei z, iar i = sqrt(-1). Pentru a defini o variabila complexa trebuie sa definim mai intai doua variabile simbolice reale, corespunzand partii reale si celei imaginare a variabilei complexe, apoi utilizam formula de mai sus in care variabila i este predefinita. Pentru aceasta se utilizeaza instructiunea syms cu optiunea <b>real</b> sau functia sym cu aceeasi optiune:</p><p>-&gt; cu instructiunea syms:</p><pre class="codeinput">    syms <span class="string">x</span> <span class="string">y</span> <span class="string">real</span>
+    z = x + i * y
+</pre><pre class="codeoutput"> 
+z =
+ 
+x + y*1i
+ 
+</pre><p>-&gt; cu functia sym:</p><pre class="codeinput">    x = sym(<span class="string">'x'</span>, <span class="string">'real'</span>);
+    y = sym(<span class="string">'y'</span>, <span class="string">'real'</span>);
+    z = x + i * y
+</pre><pre class="codeoutput"> 
+z =
+ 
+x + y*1i
+ 
+</pre><p>In expresiile cu numere complexe se pot utiliza functiile matematice standard: real, imag, conj, abs, etc.</p><p>Exemplu:</p><p>Sa definim o variabila simbolica complexa si sa calculam conjugata, partea reala  si modulul.</p><pre class="codeinput">    syms <span class="string">x</span> <span class="string">y</span>;
+    z = x + i * y;
+    conj(z)
+    real(z)
+    abs(z)
+</pre><pre class="codeoutput"> 
+ans =
+ 
+conj(x) - conj(y)*1i
+ 
+ 
+ans =
+ 
+real(x) - imag(y)
+ 
+ 
+ans =
+ 
+abs(x + y*1i)
+ 
+</pre><p>Daca dorim sa stergem proprietatea real a unei variabile declarata anterior cu instructiunea syms sau functia sym, utilizam instructiunea syms cu optiunea <b>unreal</b> .</p><p>Exemplu:</p><pre class="codeinput">    syms <span class="string">x</span> <span class="string">real</span>;
+    syms <span class="string">x</span> <span class="string">unreal</span>; <span class="comment">% // de preferat clears in loc de unreal</span>
+</pre><pre class="codeoutput">Warning: SYMS X UNREAL and SYMS('X','UNREAL')
+will not accept UNREAL in a future release.
+SYMS X clears assumptions by default. 
+</pre><h2 id="48">Matrice simbolice</h2><p>Matricele simbolice au ca elemente obiecte simbolice, constante, variabile sau expresii simbolice. Operatiile cu matrice se efectueaza cu operatorii +, -, <b>, /, \, ^, .</b>, ./, .\ si .^. Semnificatia operatorilor +, -, * este cea de adunare, scadere si inmultire a matricelor cu dimensiuni corespunzatoare. Semnificatia celorlalti operatori este cea de mai jos:</p><p>/ -&gt; a*inv(b)</p><p>\ -&gt; inv(a)*b</p><p>^ -&gt; a^b</p><p>.* -&gt; c(i,j)=a(i,j)*b(i,j)</p><p>./ -&gt; c(i,j)=a(i,j)/b(i,j)</p><p>.\ -&gt; c(i,j)=a(i,j)\b(i,j)</p><p>.^ -&gt; c(i,j)=a(i,j)^b(i,j) Elementele matricelor simbolice se adreseaza cu indici in acelasi fel ca elementele matricelor numerice. Putem defini matrice simbolice in doua feluri:</p><p>-&gt; matrice cu elemente simbolice;</p><p>-&gt; sa convertim matrice numerice in matrice simbolice cu functia sym.</p><p>Exemplu:</p><pre class="codeinput">    syms <span class="string">a</span> <span class="string">b</span> <span class="string">c</span> <span class="string">d</span>;
+    M = [a b; c d]
+</pre><pre class="codeoutput"> 
+M =
+ 
+[ a, b]
+[ c, d]
+ 
+</pre><pre class="codeinput">    det(M)
+</pre><pre class="codeoutput"> 
+ans =
+ 
+a*d - b*c
+ 
+</pre><pre class="codeinput">    inv(M)
+</pre><pre class="codeoutput"> 
+ans =
+ 
+[  d/(a*d - b*c), -b/(a*d - b*c)]
+[ -c/(a*d - b*c),  a/(a*d - b*c)]
+ 
+</pre><pre class="codeinput">    R = M * inv(M)
+</pre><pre class="codeoutput"> 
+R =
+ 
+[ (a*d)/(a*d - b*c) - (b*c)/(a*d - b*c),                                     0]
+[                                     0, (a*d)/(a*d - b*c) - (b*c)/(a*d - b*c)]
+ 
+</pre><pre class="codeinput">    R = inv(M) * M
+</pre><pre class="codeoutput"> 
+R =
+ 
+[ (a*d)/(a*d - b*c) - (b*c)/(a*d - b*c),                                     0]
+[                                     0, (a*d)/(a*d - b*c) - (b*c)/(a*d - b*c)]
+ 
+</pre><p>Pentru a afisa expresia R in forma matematica utilizam functia pretty.</p><pre class="codeinput">    pretty(R)
+</pre><pre class="codeoutput">/    a d         b c                           \
+| --------- - ---------,           0           |
+| a d - b c   a d - b c                        |
+|                                              |
+|                           a d         b c    |
+|           0,           --------- - --------- |
+\                        a d - b c   a d - b c /
+
+</pre><p>Putem simplifica expresiile de mai sus cu functia <b>simplify</b> si obtinem matricea unitate.</p><pre class="codeinput">    simplify(M*inv(M))
+</pre><pre class="codeoutput"> 
+ans =
+ 
+[ 1, 0]
+[ 0, 1]
+ 
+</pre><p>Exemplu:</p><pre class="codeinput">    syms <span class="string">a</span> <span class="string">b</span> <span class="string">c</span> <span class="string">d</span>;
+    A = [a 0; b c]
+</pre><pre class="codeoutput"> 
+A =
+ 
+[ a, 0]
+[ b, c]
+ 
+</pre><pre class="codeinput">    B = [-a b; -c d]
+</pre><pre class="codeoutput"> 
+B =
+ 
+[ -a, b]
+[ -c, d]
+ 
+</pre><pre class="codeinput">    R = A+B
+</pre><pre class="codeoutput"> 
+R =
+ 
+[     0,     b]
+[ b - c, c + d]
+ 
+</pre><pre class="codeinput">    R = A*B
+</pre><pre class="codeoutput"> 
+R =
+ 
+[        -a^2,       a*b]
+[ - c^2 - a*b, b^2 + c*d]
+ 
+</pre><p>Pentru a scrie expresia simbolica R in forma matematica, utilizam functia pretty</p><pre class="codeinput">    pretty(R)
+</pre><pre class="codeoutput">/       2              \
+|    - a ,       a b   |
+|                      |
+|    2         2       |
+\ - c  - a b, b  + c d /
+
+</pre><p>Exemplu:</p><pre class="codeinput">   syms <span class="string">a</span> <span class="string">b</span> <span class="string">c</span> <span class="string">real</span>;
+   A = [a+i*b c; -c a-i*b]
+</pre><pre class="codeoutput"> 
+A =
+ 
+[ a + b*1i,        c]
+[       -c, a - b*1i]
+ 
+</pre><pre class="codeinput">    det(A)
+</pre><pre class="codeoutput"> 
+ans =
+ 
+a^2 + b^2 + c^2
+ 
+</pre><pre class="codeinput">    conj(A)
+</pre><pre class="codeoutput"> 
+ans =
+ 
+[ a - b*1i,        c]
+[       -c, a + b*1i]
+ 
+</pre><p>Exemplu:</p><p>Fie H matricea Hilbert de dimensiune patru. Sa convertim aceasta matrice intr-o matrice simbolica. Calculele cu numere simbolice rationale se fac cu precizie infinita.</p><pre class="codeinput">H = hilb(4)
+H = sym(H)
+det(H)
+inv(H)
+</pre><pre class="codeoutput">
+H =
+
+    1.0000    0.5000    0.3333    0.2500
+    0.5000    0.3333    0.2500    0.2000
+    0.3333    0.2500    0.2000    0.1667
+    0.2500    0.2000    0.1667    0.1429
+
+ 
+H =
+ 
+[   1, 1/2, 1/3, 1/4]
+[ 1/2, 1/3, 1/4, 1/5]
+[ 1/3, 1/4, 1/5, 1/6]
+[ 1/4, 1/5, 1/6, 1/7]
+ 
+ 
+ans =
+ 
+1/6048000
+ 
+ 
+ans =
+ 
+[   16,  -120,   240,  -140]
+[ -120,  1200, -2700,  1680]
+[  240, -2700,  6480, -4200]
+[ -140,  1680, -4200,  2800]
+ 
+</pre><h2 id="64">Crearea de functii abstracte</h2><p>In multe cazuri este avantajos sa cream o functie nedeterminata (abstracta) care actioneaza asupra obiectelor simbolice si apoi poate fi utilizata in expresii. Acest lucru se face cu instructiunea f = sym('f(x)') Variabila simbolica f poate fi utilizata apoi in expresii simbolice. De exemplu, pentru a crea expresia simbolica <b>(f(x+h)-f(x))/h</b> vom scrie <b>df = (sub(f, x, x+h) - f)/h</b> .</p><h2 id="65">Reprezentarea grafica a functiilor</h2><p>Reprezentarea grafica a functiilor se face cu functia <b>ezplot</b> . Reprezentarea grafica a unei functii de o variabila, f(x), se face cu functia <b>ezplot(f, [min, max])</b>, unde min si max sunt limitele domeniului. Daca limitele sunt omise, domeniul de reprezentare este -2?&lt; x &lt; 2? .</p><p>Exemplu:</p><pre class="codeinput">syms <span class="string">f</span> <span class="string">x</span>;
+f = x^3 / (x - 1);
+ezplot(f)
+grid
+</pre><img vspace="5" hspace="5" src="tema2_01.png" alt=""> <p>Curbele plane definite parametric prin formulele simbolice x = x(t) si y = y(t) se reprezinta grafic cu functia <b>ezplot(x, y, [tmin, tmax])</b> , unde tmin, tmax sunt limitele domeniului de reprezentare. Daca limitele sunt omise, domeniul de reprezentare este 0 &lt; t &lt; 2?.</p><p>Exemplu:</p><p>Reprezentarea grafica a curbei definita parametric prin ecuatiile: x = 2sin(2t) si y = 4cos(2t).</p><pre class="codeinput">syms <span class="string">x</span> <span class="string">y</span> <span class="string">t</span>;
+x = 2 * sin(2 * t);
+y = 4 * cos(2 * t);
+ezplot(x, y);
+grid
+</pre><img vspace="5" hspace="5" src="tema2_02.png" alt=""> <p>Curbele plane definite implicit de relatia f(x, y) = 0 se reprezinta grafic cu functia  <b>ezplot(f, [xmin, xmax, ymin, ymax])</b>, unde xmin, xmax, ymin, ymax sunt limitele domeniului de reprezentare. Functia ezplot(f, [min, max]) reprezinta grafic functia f(x, y) = 0 pe domeniul min &lt; x &lt; max, min &lt; y &lt; max. In cazul in care domeniul nu este precizat, functia ezplot(f) reprezinta grafic functia f(x, y) = 0 pe domeniul -2?&lt; x &lt; 2?, -2?&lt; y &lt; 2?.</p><p>Exemplu:</p><p>Sa reprezentam grafic functia x^4 + y^3 &#8211; x &#8211; y =0. Programul este urmatorul:</p><pre class="codeinput">syms <span class="string">x</span> <span class="string">y</span> <span class="string">f</span>;
+f = x^4 + y^3 - x - y
+ezplot(f)
+grid
+</pre><pre class="codeoutput"> 
+f =
+ 
+x^4 - x + y^3 - y
+ 
+</pre><img vspace="5" hspace="5" src="tema2_03.png" alt=""> <p class="footer"><br><a href="https://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2018b</a><br></p></div><!--
+##### SOURCE BEGIN #####
+%% Functii | Calcul Simbolic
+%% Functii
+%% Definirea functiilor
+% Functiile se definesc în fisiere cu extensia .m . Linia de definitie a unei functii este : *function [y1, y2, …, yn ] = numefunctie (x1, x2, … xk)*. Variabilele x1, x2, …, xk sunt parametri de intrare. Variabilele y1, y2, …, yn sunt calculate de functie si sunt parametrii de iesire. Parametrii din definitia functiei se numesc formali. Functiile pot avea propriile variabile locale. Functiile opereaza asupra variabilelor din propriul lor spatiu, adica variabilele locale si parametrii.
+% 
+% Exemplu
+[a, b] = patrcub(2)
+%%
+% O functie este apelata ca termen intr-o expresie. Parametrii formali din definitia functiei sunt inlocuiti la apelare cu parametrii actuali. Parametrii de intrare actuali pot fi expresii ce contin constante, variabile sau functii. De exemplu, functia de mai sus este apelata ca [a, b] = pc(2).
+% 
+% Orice functie are 2 parametri impliciti de intrare: 
+% 
+% -> *nargin* – numarul de parametri de intrare;
+% 
+% -> *nargout* – numarul de parametri de iesire.
+% 
+% Executia unei functii se termina in mod normal la sfarsitul functiei. Pentru a termina executia functiei mai inainte se utilizeaza instructiunea *return*.
+% 
+% Functiile sunt salvate in fisiere ce au numele functiei si extensia *.m* . Intr-un fisier *.m* se pot defini mai multe functii, apelate de prima functie definita in fisier.
+%% Instructiunea global
+% Instructiunea *global* se utilizeaza pentru a defini variabile globale. Daca mai multe functii si spatiul de baza trebuie sa utilizeze aceeasi variabila, aceasta variabila trebuie declarata globala, in fiecare functie si in spatiul de baza. La atribuirea unei valori acestei variabile in orice functie sau in spatiul de baza, valoarea este accesibila tuturor functiilor si spatiul de baza ce au declarat variabila ca globala.
+% 
+% Forma instructiunii *global* este : global  v1 v2 … .
+% 
+% Exemplu : 
+    % 
+    % Fie functia urmatoare ce utilizeaza o variabila globala numita comp ce contine o matrice.
+    % 
+    % Programul urmator citeste o matrice in variabila globala comp si apoi apeleaza functia *fcn*.
+    % 
+    % Se declara variabila globala comp
+		global comp
+    % citeste datele din fisierul comp.txt în matricea comp
+		load comp.txt
+		x = [1, 2] ;
+		fcn(x)
+%% Variabile handle de functii
+% O variabila de tip handle de functii contine toate informatiile necesare despre o functie care trebuie apelata mai tarziu. De obicei, o variabila de tip handle de functii este pasata ca argument unei alte functii.
+% 
+% Instructiunea	*fh = @numefunctie* memoreaza in variabila fh un handle al functiei numefunctie. Variabila fh poate fi pasata ca argument altei functii. Apelarea functiei numefunctie pasata printr-o variabila handle se face astfel : *fh (lista de parametri)* unde lista de parametri contine parametrii actuali ai functiei  numefunctie.
+% 
+% Exemplu:
+    % 
+    % Fie functia fun1(x) care calculeaza valoarea (x + 1) ^ 2. Functia este memorata in fisierul *fun1.m* .
+    % 
+    % Sa calculam valoarea fun1(1.3). Functia poate fi apelata in doua moduri:
+        %  
+        % • ca o expresie in membrul drept al unei instructiuni de atribuire: 
+
+                    z = fun1(1.3)
+
+        %%   
+        % • printr-o variabila handle:
+
+                    fh = @fun1;
+                    z = fh(1.3)
+%%
+% Exemplu:
+    % 
+    % Fie functia fun2(x,y) ce calculeaza suma si suma patratelor a doua numere. Functia este memorata in fisierul *fun2.m* .
+    % 
+    % Vom apela functia cu valorile x=2.1, y=-0.8:
+        % 
+        % • ca o expresie in membrul drept al unei instructiuni de atribuire:
+                [z1 z2] = fun2(2.1, -0.8)
+        %%
+        % • printr-o variabila handle: 
+                hf = @fun2;
+                [z1 z2] = hf(2.1, -0.8)
+%%
+% In exemplele anterioare, functiile erau definite in fisiere *.m* . Este posibil sa definim in program functii limitate la o singura expresie, fara nume, si sa le atribuim unei variabile handle. Ele sunt apelate prin variabila handle, ca mai inainte. Asemenea functii fara nume se numesc *anonime* . Definitia unei functii anonime este *@(lista parametrilor formali de intrare) expresia functiei* .
+% 
+% Exemplu: 
+    % 
+    % Sa definim o functie anonima ce calculeaza expresia (x+1)^2 si sa o apelam cu x=2.1 .
+            fx = @(x)(x+1)^2 ;
+            z = fx(2.1)
+%%
+% Exemplu:
+    % 
+    % Sa definim o functie anonima care calculeaza suma si suma patratelor a doua numere in vectorul [x+y, x^2+y^2]. O vom apela cu valorile 1.3 si -0.8.
+                    fz=@(x,y)[x+y, x^2+y^2] ;
+                    [z]=fz(1.3,-0.8)
+%%
+% O functie definita intr-un fisier *.m* poate avea ca parametru de intrare o variabila handle. Variabila handle se poate initializa cu o functie definita intr-un fisier *.m* , cu o functie anonima, sau cu o functie standard Matlab. In acest fel, o functie poate avea ca parametri alte functii. Fie *fcn* o functie ce are ca parametru o alta functie: x = fcn(f, lista de parametri). Aici f este o variabila handle, iar lista de parametri va contine parametrii lui f si alti parametri ai functiei fcn. Fie *fun* o functie ce va fi pasata ca parametru functiei fcn.
+% 
+% Apelarea functiei *fcn* se face cu urmatoarea secventa de instructiuni:
+    % 
+    % • creaza variabila handle f
+        % 
+        % f = @fun ;
+        % 
+    % • paseaza variabila handle si lista de parametri actuali ai functiilor fcn si fun
+        %      
+        % x = fcn(f, lista de parametri actuali);
+% 
+% Exemplu: 
+% 
+% Fie functia *funb(x)* ce va calcula expresia *sin(f(x))* , unde f(x) este o functie oarecare, ce va fi parametru al functiei funb. Functia funb este memorata in fisierul *funb.m* .
+% 
+% Vrem sa calculam expresiile sin(x^2) si sin(x^3) cu x = 2.1 . Vom defini functia *funa* ce calculeaza valoarea x^3 si *func* care calculeaza valoarea x^2.
+% 
+% Apelam functia funb cu primul parametru handle al functiei funa si al doilea parametru 2.1 si obtinem: 
+        fh=@funa
+        z=funb(fh,2.1)
+%%
+% Apelam functia funb cu primul parametru handle al functiei func si al doilea parametru 2.1 si obtinem: 
+        fh=@func
+        z=funb(fh,2.1)
+%%
+% Exemplul de mai sus are rolul de a exemplifica utilizarea functiilor Matlab ce au ca parametri alte functii. In cazul in care functia ce este parametru este simpla, putem utiliza o functie anonima ca parametru.
+        z = funb(@(x)x^3, 2.1)
+%%
+% Limbajul Matlab are functia standard *feval* care se utilizeaza pentru evaluarea functiilor standard si a celor utilizator din fisierele *.m* . Functia feval utilizeaza o variabila tip handle pentru a evalua functiile. Functia feval are forma: *feval(handle, arg1, arg2, …, argn)*, unde:
+        % 
+        % handle – variabila handle a functiei ce va fi evaluata;
+        % 
+        % arg1, arg2, ..., argn – parametrii functiei ce va fi evaluata.
+% 
+% Vom rescrie exemplele de mai sus utilizand functia feval. Fie functia *funb2* ce calculeaza expresia sin(f(x)). 
+        % 
+        % Functia funb2 este apelata pentru a calcula sin(2.1^3) astfel:
+            fh=@funa;
+            b=funb2(fh,2.1)
+%%
+% Varianta II
+% 
+% Functia funb3 este apelata pentru a calcula sin(2.1^2) astfel:
+            fh=@func;
+            b=funb3(fh,2.1)
+%%
+% Functia feval poate evalua si functii anonime. De exemplu, pentru a calcula valoarea expresiei x^3 pentru x=1.5 putem scrie: 
+            feval(@(x)x^3,1.5)
+%%
+% Matlab are functia predefinita *functions* ce are ca parametru o variabila tip handle de functii si ca rezultat o structura cu informatiile despre functia continuta in variabila handle. De exemplu, pentru a obtine structura cu informatii despre functia funa vom scrie:
+			a = functions(@funa)
+%%
+% Pentru a afla doar fisierul in care este definita functia vom afisa campul *file* al structurii *a* in felul urmator:
+            a.file
+%% Vectorizarea functiilor
+% Toate functiile standard Matlab pot fi aplicate asupra vectorilor si matricelor. In acest caz functia se aplica asupra fiecarui element al vectorului sau matricei (vectorizarea functiei). Fie de exemplu vectorul:
+            a=[1.1, -2.3, pi]
+%%
+            b=sin(a)
+%% Aplicarea functiilor asupra tablourilor de celule
+% Functia *cellfun()* permite sa aplicam o functie asupra fiecarui element al unui tablou de celule. Atunci cand rezultatul functiei este un scalar si valorile scalare pot fi concatenate intr-un tablou, cellfun() are forma: *A = cellfun(fun, C1, C2, …)*, unde Ci sunt tablouri de celule, iar fun este o variabila handle de functie ce se aplica asupra fiecarei celule din Ci.
+% 
+% Exemplu:
+% 
+% Sa calculam lungimea tablourilor din celulele vectorului X
+    X={1:10, [2; 4; 6]}
+    cellfun(@length,X)
+%%
+% Functia cellfun are si forma: A = cellfun(fun, C1, C2, … ‘Param1’, val1, …), unde *Parami* sunt parametri, iar *vali* sunt valorile acestor parametri.
+% 
+% Atunci cand functia fun nu are ca rezultat un scalar, sau rezultatele nu pot fi concatenate intr-un tablou, utilizam parametrul *UniformOutput* pus la valoarea false.
+% Exemplu: 
+% 
+% Sa aplicam functia abs asupra elementelor vectorului de celule X. Rezultatul aplicarii functiei abs asupra unei celule este un vector.
+    R = cellfun(@abs, X, 'UniformOutput' , false)
+%%
+    celldisp(R)
+%% Calcul simbolic
+%% Definirea variabilelor si functiilor simbolice
+% Calculul simbolic opereaza cu obiecte simbolice: variabile, matrice si
+% expresii simbolice. Variabilele simbolice se definesc in doua feluri: 
+% 
+% • cu instructiunea *syms*, care defineste variabile simbolice;
+% 
+% • orice variabila ce primeste ca valoare o expresie simbolica devine o variabila simbolica; atribuirea de valori unei variabile se face cu operatorul *"="*.
+% 
+% Instructiunea syms are forma: *syms var var var ...* , unde var sunt nume de variabile simbolice.
+% 
+% Exemplu:
+% 
+% Definim variabilele simbolice a,b si c cu instructiunea syms si atribuim variabilei a ca valoare expresia simbolica *b+c* .
+    syms a b c
+    a=b+c
+%%
+% Fie instructiunea *m=b+c*, m este acum o variabila simbolica, deoarece a primit ca valoare o expresie simbolica.
+% 
+% Expresiile simbolice se definesc la fel ca expresiile aritmetice din Matlab, in care variabilele numerice sunt inlocuite cu variabile simbolice. Se includ aici si vectorii si matricele cu elemente expresii simbolice, asupra carora se pot efectua calcule simbolice analoge calculelor numerice din Matlab.
+% 
+% Expresiile simbolice au ca termeni variabile simbolice si functii simbolice si ca operatori aritmetici: *+, -, *, /, \, ^* . Operatorii, +, -, *, /, sunt cei patru operatori aritmetici cunoscuti. Operatia *"a \ b"* se defineste ca (1/a)*b. Operatorul *"^"* este ridicarea la putere.
+% 
+% Prioritatile operatorilor aritmetici sunt cele cunoscute. Operatorii + si – unari au cea mai mare prioritate, urmati de operatorii *, /, \, ^, iar operatorii + si – binari au cea mai mica prioritate. Operatorii unari sunt asociativi la dreapta, operatorii binari sunt asociativi la stanga. In cadrul expresiilor aritmetice se pot utiliza paranteze rotunde, ( si ), pentru a modifica prioritatile operatorilor. 
+% 
+% Functiile matematice uzuale ce se pot utiliza in expresiile simbolice sunt cele de mai jos :
+% 
+% sin asin sqrt exp
+% 
+% cos acos abs log
+% 
+% tan atan log10
+% 
+% Exista inca un mod de a crea expresii simbolice, functia *sym* . Aceasta functie are forma *sym(' expresie simbolica')* si are ca rezultat o expresie simbolica ce poate fi atribuita unei variabile simbolice. Reamintim ca o expresie simbolica are ca termeni variabile simbolice, definite anterior.
+% 
+% Exemple: 
+% 
+% Sa definim functia simbolica liniara *f(x) = a * x + b* . Primul mod de a defini functia este de a defini variabilele simbolice a, x, b si f cu instruc?iunea syms si apoi atribuim lui f ca valoare expresia simbolica:
+    syms a x b f;
+    f = a * x + b
+%%
+% Al doilea mod defineste expresia simbolica cu functia sym:
+   % 
+   % syms a x b f;
+   % 
+   % f = sym ('a * x + b');
+%%
+% In unele cazuri trebuie sa cream expresii simbolice in care intervin constante. Acest lucru se face cu functia sym. De exemplu, pentru a crea o functie simbolica constanta ce are valoarea 3 vom scrie: 
+    f=sym('3')
+%%
+% sau
+    f= sym(3)
+%%
+% Exemplu:
+% 
+% Vom defini variabilele simbolice a, b ?i x si polinoamele simbolice f(x) = a*x^2 + 2 si g(x) = x + b si vom calcula produsul lor, f(x) * g(x). Programul este urmatorul:
+    syms a b x f g;
+    f = a *x^2+2
+    g = x + b
+    f * g
+%%
+% Exemplu:
+% 
+% Sa definim variabila simbolica x si functia simbolica g(x) = radical din x^2+x+1.
+    syms x g;	
+    g = sqrt(x^2 + x + 1)
+%% Substitutii
+% Este posibil sa atribuim valori numerice variabilelor simbolice si, in acest caz, expresiile simbolice sunt evaluate la valoarea numerica corespunzatoare. Aceste substitutii ale variabilelor simbolice cu valori numerice se fac cu functia *subs* cu formele: *subs(expresie simbolica, variabila simbolica, valoare numerica)* , in cazul cand substituim o singura variabila, si *subs(expresie simbolica, {variabile simbolice}, {valori numerice})* , in cazul cand substituim mai multe variabile.
+% 
+% Exemplu:
+% 
+% Fie functia simbolica f(x)=x^2 - 3*x + 2. Vom substitui variabila simbolica x cu valoarea 2.
+syms f x;
+f = x^2 - 3 * x + 2;
+subs(f, x, 2)
+subs(f, x, -2)
+%%
+% Exemplu:
+% 
+% Fie functia de doua variabile f(x,y)=x^2+x*y. Vom substitui variabila simbolica x cu 2.
+syms x y f;
+f = x^2 + x * y;
+subs(f, x, 2)
+subs(f, y, 3)
+subs(f, {x, y}, {-1,2})
+%%
+% Reamintim ca, lista cu variabilele simbolice ce vor fi substituite si lista cu valori sunt incluse intre acolade, { }. In cazul cand substituim o singura variabila simbolica cu o valoare, functia subs are si urmatoarea forma simpla: *subs(expresie simbolica, valoare numerica)* .
+% 
+% Daca expresia simbolica depinde de mai mult de o variabila si variabila pentru care se face substitutia nu este specificata, substitutia se face pentru variabila simbolica implicita, care se alege dupa urmatoarea regula: 
+% 
+% -> se alege litera cea mai apropiata de x din alfabet; 
+% 
+% -> daca exista doua litere egal departate de x, se alege ultima din alfabet din cele doua.
+% 
+% Exemplu:
+syms x t;
+f = t^2 * cos(x + t)
+subs(f,2)
+%%
+% Dupa cum se observa, se substituie variabila simbolica x cu valoarea 2, aleasa dupa regula de mai sus.
+% 
+% Variabilele simbolice dintr-o expresie se pot determina cu functia *findsym* .
+% 
+% Exemplu:
+syms t omega psi f x g;
+f = cos(omega * t + psi);
+g = x^3 - x +1
+findsym(f)
+findsym(g)
+%%
+% Variabila simbolica implicita dintr-o expresie f se poate determina cu functia *findsym(f,1)* .
+% 
+% Exemplu:
+syms x t;
+f = t^2 * cos(x + t)
+findsym(f, 1)
+%%
+% Mentionam ca pentru afisarea expresiilor simbolice intr-un format apropiat de cel din matematica se utilizeaza functia *pretty* ce are ca parametru expresia simbolica.
+%% Reprezentarea simbolica a numerelor
+% Numerele se reprezinta simbolic in urmatoarele feluri:
+% 
+% -> in virgula mobila, sub forma unei mantise inmultita cu 2 la un anumit exponent; mantisa contine 13 cifre hexazecimale;
+% 
+% -> ca numar rational, ca raport a doua numere intregi;
+% 
+% -> ca numar rational plus precizia relativa; precizia relativa este diferenta intre valoarea numarului rational si valoarea lui reprezentata in virgula mobila, si este exprimata in functie de eps, precizia reprezentarii numerelor in virgula mobila;
+% 
+% -> ca numar zecimal cu un numar specificat de cifre semnificative; implicit, numarul de cifre este 32, dar el poate fi specificat cu functia *digits* dupa cum se arata mai jos.
+% Conversia intre numar si reprezentarea sa simbolica se face cu functia *sym* cu un parametru ce specifica tipul reprezentarii simbolica dupa cum se arata mai jos.
+% 
+% in virgula mobila -> sym(x, 'f');
+% 
+% ca numar rational	-> sym(x, 'r');
+% 
+% ca numar rational plus precizia relativa -> sym(x, 'e');
+% 
+% ca numar zecimal cu un numar specificat de cifre semnificative -> sym(x, 'd').
+% 
+% Operatiile cu numere rationale se fac dupa regulile din aritmetica.
+% 
+% Exemplu:
+    sym(2)/sym(3) + sym(4)/sym(5)
+%%
+% Exemplu:
+% 
+% Fie numarul 0.2, a carui valoare va fi convertita intr-un numar symbolic in formele de mai sus.
+sym(0.2, 'f')
+%%
+sym(0.2, 'r')
+%%
+sym(0.2, 'e')
+%%
+sym(0.2, 'd')
+%%
+digits(10)
+sym(0.2, 'd')
+%% Definirea de variabile simbolice reale si complexe
+% O variabila complexa este o pereche ordonata de doua variabile reale. Fie x si y doua variabile reale. O variabila complexa este z = x + i * y, unde x este partea reala, y este partea imaginara a variabilei z, iar i = sqrt(-1). Pentru a defini o variabila complexa trebuie sa definim mai intai doua variabile simbolice reale, corespunzand partii reale si celei imaginare a variabilei complexe, apoi utilizam formula de mai sus in care variabila i este predefinita. Pentru aceasta se utilizeaza instructiunea syms cu optiunea *real* sau functia sym cu aceeasi optiune: 
+% 
+% -> cu instructiunea syms:
+    syms x y real
+    z = x + i * y 
+%%
+% -> cu functia sym:
+    x = sym('x', 'real'); 
+    y = sym('y', 'real');
+    z = x + i * y
+%%
+% In expresiile cu numere complexe se pot utiliza functiile matematice standard: real, imag, conj, abs, etc.
+% 
+% Exemplu:
+% 
+% Sa definim o variabila simbolica complexa si sa calculam conjugata, partea reala  si modulul.	
+    syms x y;
+    z = x + i * y;
+    conj(z) 
+    real(z)
+    abs(z)
+%%
+% Daca dorim sa stergem proprietatea real a unei variabile declarata anterior cu instructiunea syms sau functia sym, utilizam instructiunea syms cu optiunea *unreal* .
+% 
+% Exemplu: 
+    syms x real;
+    syms x unreal; % // de preferat clears in loc de unreal
+%% Matrice simbolice
+% Matricele simbolice au ca elemente obiecte simbolice, constante, variabile sau expresii simbolice. Operatiile cu matrice se efectueaza cu operatorii +, -, *, /, \, ^, .*, ./, .\ si .^. Semnificatia operatorilor +, -, * este cea de adunare, scadere si inmultire a matricelor cu dimensiuni corespunzatoare. Semnificatia celorlalti operatori este cea de mai jos: 
+% 
+% / -> a*inv(b)
+% 
+% \ -> inv(a)*b
+% 
+% ^ -> a^b
+% 
+% .* -> c(i,j)=a(i,j)*b(i,j)
+% 
+% ./ -> c(i,j)=a(i,j)/b(i,j)
+% 
+% .\ -> c(i,j)=a(i,j)\b(i,j)
+% 
+% .^ -> c(i,j)=a(i,j)^b(i,j)
+% Elementele matricelor simbolice se adreseaza cu indici in acelasi fel ca elementele matricelor numerice. Putem defini matrice simbolice in doua feluri:
+% 
+% -> matrice cu elemente simbolice;
+% 
+% -> sa convertim matrice numerice in matrice simbolice cu functia sym.
+% 
+% Exemplu:
+    syms a b c d;
+    M = [a b; c d]
+%%    
+    det(M)
+%% 
+    inv(M)
+%%
+    R = M * inv(M)
+%%
+    R = inv(M) * M
+%%
+% Pentru a afisa expresia R in forma matematica utilizam functia pretty.
+    pretty(R)
+%%
+% Putem simplifica expresiile de mai sus cu functia *simplify* si obtinem matricea unitate.
+    simplify(M*inv(M))
+%%
+% Exemplu:
+    syms a b c d;
+    A = [a 0; b c]
+%%
+    B = [-a b; -c d]
+%%
+    R = A+B
+%%
+    R = A*B
+%%
+% Pentru a scrie expresia simbolica R in forma matematica, utilizam functia pretty
+    pretty(R)
+%%
+% Exemplu:
+   syms a b c real;
+   A = [a+i*b c; -c a-i*b] 
+%%
+    det(A)
+%%
+    conj(A)
+%%
+% Exemplu:
+% 
+% Fie H matricea Hilbert de dimensiune patru. Sa convertim aceasta matrice intr-o matrice simbolica. Calculele cu numere simbolice rationale se fac cu precizie infinita.
+H = hilb(4)
+H = sym(H)
+det(H)
+inv(H)
+%% Crearea de functii abstracte
+% In multe cazuri este avantajos sa cream o functie nedeterminata (abstracta) care actioneaza asupra obiectelor simbolice si apoi poate fi utilizata in expresii. Acest lucru se face cu instructiunea f = sym('f(x)')
+% Variabila simbolica f poate fi utilizata apoi in expresii simbolice. De exemplu, pentru a crea expresia simbolica *(f(x+h)-f(x))/h* vom scrie *df = (sub(f, x, x+h) - f)/h* .
+%% Reprezentarea grafica a functiilor
+% Reprezentarea grafica a functiilor se face cu functia *ezplot* . 
+% Reprezentarea grafica a unei functii de o variabila, f(x), se face cu functia *ezplot(f, [min, max])*, unde min si max sunt limitele domeniului. Daca limitele sunt omise, domeniul de reprezentare este -2?< x < 2? .
+% 
+% Exemplu: 
+syms f x;
+f = x^3 / (x - 1);
+ezplot(f)	
+grid
+%%
+% Curbele plane definite parametric prin formulele simbolice x = x(t) si y = y(t) se reprezinta grafic cu functia *ezplot(x, y, [tmin, tmax])* , unde tmin, tmax sunt limitele domeniului de reprezentare. Daca limitele sunt omise, domeniul de reprezentare este 0 < t < 2?.
+% 
+% Exemplu: 
+% 
+% Reprezentarea grafica a curbei definita parametric prin ecuatiile: x = 2sin(2t) si y = 4cos(2t).
+syms x y t;
+x = 2 * sin(2 * t);
+y = 4 * cos(2 * t);
+ezplot(x, y);
+grid
+%%
+% Curbele plane definite implicit de relatia f(x, y) = 0 se reprezinta grafic cu functia  *ezplot(f, [xmin, xmax, ymin, ymax])*, unde xmin, xmax, ymin, ymax sunt limitele domeniului de reprezentare. Functia ezplot(f, [min, max]) reprezinta grafic functia f(x, y) = 0 pe domeniul min < x < max, min < y < max. In cazul in care domeniul nu este precizat, functia ezplot(f) reprezinta grafic functia f(x, y) = 0 pe domeniul -2?< x < 2?, -2?< y < 2?.
+% 
+% Exemplu:
+% 
+% Sa reprezentam grafic functia x^4 + y^3 – x – y =0. Programul este urmatorul:
+syms x y f;
+f = x^4 + y^3 - x - y
+ezplot(f)
+grid
+
+
+
+ 
+    
+    
+
+
+
+##### SOURCE END #####
+--></body></html>
